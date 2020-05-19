@@ -141,5 +141,22 @@ router.delete('/:movie_id', (req, res) => {
     })
 })
 
+// between date
+router.get('/between/:start_year/:end_year', (req, res, next) => {
+  const { start_year, end_year } = req.params
+  Movie.find({
+    year: {
+      "$gte": parseInt(start_year),
+      "$lte": parseInt(end_year)
+    }
+  })
+    .exec()
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
+});
 
 module.exports = router;
