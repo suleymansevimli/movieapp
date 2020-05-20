@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
+// middleware
+const verifyToken = require('./middleware/verify-token')
+
 const indexRouter = require('./routes/index');
 const movieRouter = require('./routes/movie');
 const directorRouter = require('./routes/director');
@@ -22,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', verifyToken)
 app.use('/api/movie', movieRouter);
 app.use('/api/director', directorRouter);
 
