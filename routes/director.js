@@ -118,9 +118,48 @@ router.get('/:director_id', (req, res) => {
   })
 })
 
+// update
+router.put('/:director_id', (req, res, next) => { // testID : 5ebbc1d6b047774a69fc567b
+  const promise = Director.findByIdAndUpdate(
+    req.params.director_id,
+    req.body,
+    {
+      new: true
+    }
+  );
 
+  promise.then(director => {
+    if (!director) {
+      next({ message: 'The director was not found' })
+    } else {
+      res.json({
+        director
+      })
+    }
+  }).catch(e => {
+    res.json(e)
+  })
+})
 
+// delete
+router.delete('/:director_id', (req, res) => {
+  Director.findByIdAndRemove(req.params.director_id)
+    .then(data => {
+      let result = data
+        ? { data: data, total: Object.values(data).length, status: "ok" }
+        : { status: "fail", message: "Sonuc bulunamadı", total: 0 };
 
+      // response
+      res.status(200).json({
+        result
+      })
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      })
+    })
+})
 
 
 module.exports = router;
