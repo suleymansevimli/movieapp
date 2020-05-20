@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "mocha --exit --recursive"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -17,6 +18,9 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.2",
     "nodemon": "^2.0.3"
   }
 }
