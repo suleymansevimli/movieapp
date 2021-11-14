@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
             if (err) {
                 res.json({
                     status: "false",
-                    message: "Failed to authenticate"
+                    message: "Failed to authenticate ! Please try again later."
                 })
             } else {
                 req.decode = decoded
