@@ -9,8 +9,8 @@ chai.use(chaiHttp)
 let token;
 
 describe('/api/movies tests', () => {
-    before((done) => {
-        chai.request(server)
+    before(async (done) => {
+        await chai.request(server)
             .post('/authenticate')
             .send({ username: "suleyman", password: "123123" })
             .end((err, res) => {
